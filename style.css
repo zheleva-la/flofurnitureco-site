@@ -21,7 +21,12 @@
 
 *{ box-sizing:border-box; }
 
-html{ scroll-behavior:smooth; overflow-x:hidden; }
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
 
 body{
   margin:0;
@@ -235,55 +240,20 @@ button, .btn{
 .tick.major{ height:9px; background:var(--line); opacity:1; }
 .ruler-section{ padding:2px 0; }
 
-/* ---------- Hero (full-bleed product image) ---------- */
-.hero-full{
-  position:relative;
-  width:100%;
-  height:68vh;
-  min-height:460px;
-  max-height:640px;
-  overflow:hidden;
+/* ---------- Hero (intro text + scrolling marquee of portrait photos) ---------- */
+.hero-marquee-section{
+  padding-top:88px;
+  padding-bottom:96px;
 }
-.hero-full-media{
-  position:absolute;
-  inset:0;
-  background:var(--line-soft);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.hero-intro{
+  max-width:640px;
+  margin-bottom:64px;
 }
-.hero-full-media img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 30%;
-}
-.hero-full-media .ph-icon{
-  width:26%;
-  max-width:260px;
-  opacity:.55;
-}
-.hero-full-scrim{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(0deg, rgba(42,32,21,.82) 0%, rgba(42,32,21,.35) 45%, rgba(42,32,21,0) 72%);
-}
-.hero-full-content{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding:0 24px 52px;
-  z-index:2;
-}
-.hero-full-content .inner{
-  max-width:var(--max);
-  margin:0 auto;
-}
-.hero-full-content .eyebrow{ color:#D9C6A3; }
-.hero-full-content h1{ color:#FBF5E9; max-width:16ch; }
-.hero-full-content p.lead{
-  color:#E7DAC2;
-  max-width:46ch;
-  font-size:1.08rem;
+.hero-intro .lead{
+  font-size:1.15rem;
+  max-width:52ch;
+  color:var(--ink-soft);
+  margin-bottom:32px;
 }
 .hero-actions{
   display:flex;
@@ -291,29 +261,64 @@ button, .btn{
   flex-wrap:wrap;
   margin-top:8px;
 }
-.hero-full .ph-badge{
-  position:absolute;
-  top:18px;
-  right:18px;
-  z-index:2;
-  background:rgba(251,245,233,.92);
-  color:var(--ink-soft);
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  padding:6px 12px;
-  border-radius:20px;
-  border:1px solid var(--line);
+
+.hero-marquee{
+  overflow:hidden;
+  position:relative;
+  width:100%;
+  /* Fade the left and right edges so photos glide in/out rather than getting cut off */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);
+}
+.hero-marquee-track{
+  display:flex;
+  gap:20px;
+  width:max-content;
+  animation:hero-scroll 45s linear infinite;
+}
+.hero-marquee:hover .hero-marquee-track{
+  animation-play-state:paused;
+}
+.hero-marquee-item{
+  flex:0 0 260px;
+  aspect-ratio:3/4;
+  margin:0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--line-soft);
+}
+.hero-marquee-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-@media (max-width: 640px){
-  .hero-full{ height:64vh; min-height:420px; }
+@keyframes hero-scroll{
+  from{ transform:translateX(0); }
+  to{   transform:translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-marquee-track{ animation:none; }
+}
+
+@media (max-width: 820px){
+  .hero-marquee-section{ padding-top:56px; padding-bottom:64px; }
+  .hero-intro{ margin-bottom:44px; }
+  .hero-marquee-item{ flex:0 0 220px; }
+  .hero-marquee-track{ gap:14px; animation-duration:38s; }
+}
+
+@media (max-width: 480px){
+  .hero-marquee-item{ flex:0 0 180px; }
+  .hero-marquee-track{ gap:12px; animation-duration:32s; }
 }
 
 /* ---------- Feature strip ---------- */
 .features{
-  padding:72px 0;
+  padding-top:72px;
+  padding-bottom:72px;
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:44px;
@@ -331,7 +336,7 @@ button, .btn{
 }
 
 /* ---------- Card grid ---------- */
-.section{ padding:80px 0; }
+.section{ padding-top:80px; padding-bottom:80px; }
 .section-head{
   display:flex;
   align-items:flex-end;
@@ -401,26 +406,47 @@ button, .btn{
   grid-template-columns:.9fr 1.1fr;
   gap:72px;
   align-items:center;
-  padding:80px 0;
+  padding-top:80px;
+  padding-bottom:80px;
 }
 @media (max-width:820px){ .story{ grid-template-columns:1fr; } }
-.story-art{
-  background:var(--line-soft);
-  border-radius:var(--radius);
-  padding:44px;
+.story-photo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
-.stat-row{ display:flex; gap:44px; margin:24px 0 32px; flex-wrap:wrap; }
+.story-photo img{
+  width:min(240px,100%);
+  aspect-ratio:1/1;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+.about-photo{
+  width:100%;
+  border-radius:var(--radius);
+  aspect-ratio:4/5;
+  object-fit:cover;
+  margin-bottom:20px;
+}
+.stat-row{ display:flex; gap:36px; margin:24px 0 32px; flex-wrap:wrap; }
 .stat b{
   display:block;
   font-family:'Fraunces', serif;
-  font-size:1.9rem;
+  font-size:1.6rem;
+  font-weight:600;
   color:var(--ink);
+  line-height:1.1;
 }
 .stat span{
-  font-size:.78rem;
-  letter-spacing:.05em;
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.08em;
   text-transform:uppercase;
   color:var(--sage);
+  margin-top:4px;
 }
 
 /* ---------- CTA band ---------- */
@@ -437,7 +463,7 @@ button, .btn{
 .cta-band .btn-ghost:hover{ background:var(--cream); color:var(--dark); }
 
 /* ---------- Page header (non-home pages) ---------- */
-.page-head{ padding:96px 0 32px; }
+.page-head{ padding-top:96px; padding-bottom:32px; }
 .page-head p.lead{ max-width:60ch; font-size:1.05rem; }
 
 /* ---------- Process steps ---------- */
@@ -474,12 +500,13 @@ button, .btn{
 }
 
 /* ---------- About page ---------- */
-.about-hero{ padding:96px 0 32px; }
+.about-hero{ padding-top:96px; padding-bottom:32px; }
 .about-body{
   display:grid;
   grid-template-columns:1.1fr .9fr;
   gap:72px;
-  padding:48px 0 80px;
+  padding-top:48px;
+  padding-bottom:80px;
 }
 @media (max-width:820px){ .about-body{ grid-template-columns:1fr; } }
 .about-body .stat-row{ margin-top:8px; }
@@ -670,15 +697,15 @@ button, .btn{
   .brand-logo-img{ height:54px; width:54px; }
 
   /* Section rhythm — less breathing room needed on small screens */
-  .section{ padding:56px 0; }
-  .page-head{ padding:64px 0 20px; }
-  .cta-band{ padding:64px 0; }
-  .hero{ padding:64px 0 48px; }
-  .about-hero{ padding:64px 0 20px; }
-  .about-body{ padding:32px 0 56px; gap:40px; }
-  .story{ padding:56px 0; gap:40px; }
-  .features{ padding:48px 0; gap:32px; }
-  .steps{ padding:16px 0 56px; }
+  .section{ padding-top:56px; padding-bottom:56px; }
+  .page-head{ padding-top:64px; padding-bottom:20px; }
+  .cta-band{ padding-top:64px; padding-bottom:64px; }
+  .hero-marquee-section{ padding-top:56px; padding-bottom:64px; }
+  .about-hero{ padding-top:64px; padding-bottom:20px; }
+  .about-body{ padding-top:32px; padding-bottom:56px; gap:40px; }
+  .story{ padding-top:56px; padding-bottom:56px; gap:40px; }
+  .features{ padding-top:48px; padding-bottom:48px; gap:32px; }
+  .steps{ padding-top:16px; padding-bottom:56px; }
 
   /* Buttons: full-width and centered — much easier to tap on mobile */
   .hero-actions, .cta-band .wrap{ display:flex; flex-direction:column; align-items:stretch; gap:12px; }
@@ -692,7 +719,4 @@ button, .btn{
   .footer-grid .brand .mark{ font-size:1.15rem; }
   .footer-nav{ gap:14px 24px; }
   .footer-bottom{ flex-direction:column; gap:6px; }
-
-  /* Story teaser art box: less padding on mobile so it's not oversized */
-  .story-art{ padding:24px; }
 }

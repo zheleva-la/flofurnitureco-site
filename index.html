@@ -16,7 +16,7 @@
 <header class="site-header">
   <nav class="nav">
     <a class="brand brand-logo" href="index.html" aria-label="Flo's Furniture Co. — home">
-      <img src="images/logo.jpg" alt="Flo's Furniture Co." class="brand-logo-img">
+    <img src="images/logo.jpg" alt="Flo's Furniture Co. logo: brown hand-drawn circular seal showing crossed woodworking tools (hammer, chisel, hand plane and paintbrush) with small flowers and leaves on a warm beige textured background; text reads Flo's Furniture Co.; conveys a rustic, handmade and welcoming tone" class="brand-logo-img">
     </a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
@@ -36,20 +36,30 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero-full">
-    <div class="hero-full-media">
-      <img src="images/hero.jpg" alt="A handmade grey-blue hall stand with coat hooks, cubbies and a bench seat, installed in a customer's hallway">
+  <section class="hero-marquee-section">
+    <div class="wrap hero-intro">
+      <span class="eyebrow">Handmade in the UK · Solid Pine</span>
+      <h1>Storage furniture, made to your measure.</h1>
+      <p class="lead">A small family workshop building solid pine hall stands, benches and coat racks — sized and finished to fit your home, not the other way round.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="gallery.html">View the Gallery</a>
+        <a class="btn btn-sage" href="https://www.etsy.com/uk/shop/FloFurnitureCo" target="_blank" rel="noopener">Shop on Etsy ↗</a>
+      </div>
     </div>
-    <div class="hero-full-scrim"></div>
-    <div class="hero-full-content">
-      <div class="inner">
-        <span class="eyebrow">Handmade in the UK · Solid Pine</span>
-        <h1>Storage furniture, made to your measure.</h1>
-        <p class="lead">A small family workshop building solid pine hall stands, benches and coat racks — sized and finished to fit your home, not the other way round.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="gallery.html">View the Gallery</a>
-          <a class="btn btn-sage" href="https://www.etsy.com/uk/shop/FloFurnitureCo" target="_blank" rel="noopener">Shop on Etsy ↗</a>
-        </div>
+    <div class="hero-marquee" aria-label="Recent projects">
+      <div class="hero-marquee-track">
+        <!-- Set 1 -->
+        <figure class="hero-marquee-item"><img src="images/corner-bookshelf.jpg" alt="Handmade white corner bookshelf with oak shelves"></figure>
+        <figure class="hero-marquee-item"><img src="images/corner-bench.jpg" alt="Handmade white L-shape corner storage bench"></figure>
+        <figure class="hero-marquee-item"><img src="images/hero.jpg" alt="Grey-blue hall stand with coat hooks, cubbies and bench, installed in a home"></figure>
+        <figure class="hero-marquee-item"><img src="images/cream-console.jpg" alt="Cream console table with dark stained pine top"></figure>
+        <figure class="hero-marquee-item"><img src="images/pine-show-bench.jpg" alt="Natural pine hall settle with coat hooks and bench seat"></figure>
+        <!-- Set 2 (identical, for seamless loop) -->
+        <figure class="hero-marquee-item" aria-hidden="true"><img src="images/corner-bookshelf.jpg" alt=""></figure>
+        <figure class="hero-marquee-item" aria-hidden="true"><img src="images/corner-bench.jpg" alt=""></figure>
+        <figure class="hero-marquee-item" aria-hidden="true"><img src="images/hero.jpg" alt=""></figure>
+        <figure class="hero-marquee-item" aria-hidden="true"><img src="images/cream-console.jpg" alt=""></figure>
+        <figure class="hero-marquee-item" aria-hidden="true"><img src="images/pine-show-bench.jpg" alt=""></figure>
       </div>
     </div>
   </section>
@@ -77,22 +87,6 @@
 
   <div class="ruler-section"><div class="ruler" aria-hidden="true"></div></div>
 
-  <!-- FEATURED PIECES -->
-  <section class="section wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">A few recent pieces</span>
-        <h2>From the workshop</h2>
-      </div>
-      <a class="btn btn-ghost" href="gallery.html">See the full gallery</a>
-    </div>
-    <div class="grid" id="featured-grid">
-      <!-- Populated from featured-items.js — edit that file to change which 3 pieces show here -->
-    </div>
-  </section>
-
-  <div class="ruler-section"><div class="ruler" aria-hidden="true"></div></div>
-
   <!-- STORY TEASER -->
   <section class="wrap story">
     <div class="story-copy">
@@ -101,8 +95,8 @@
       <p>We started building furniture when our own home — and our own family — outgrew what was on the market. What began as solving our own storage problem became Flo's Furniture Co.: solid, handmade pieces built to fit real homes.</p>
       <a class="btn btn-ghost" href="about.html">Read the full story</a>
     </div>
-    <div class="story-art" aria-hidden="true">
-      <svg viewBox="0 0 300 220" fill="none"><rect x="20" y="30" width="260" height="160" rx="4" stroke="#8A9A7C" stroke-width="2"/><line x1="20" y1="70" x2="280" y2="70" stroke="#8A9A7C" stroke-width="1.5" opacity=".5"/><line x1="60" y1="30" x2="60" y2="190" stroke="#8A9A7C" stroke-width="1.5" opacity=".5"/><line x1="240" y1="30" x2="240" y2="190" stroke="#8A9A7C" stroke-width="1.5" opacity=".5"/><circle cx="150" cy="130" r="34" stroke="#99633C" stroke-width="2"/><circle cx="150" cy="130" r="18" stroke="#99633C" stroke-width="2"/></svg>
+    <div class="story-photo">
+      <img src="images/logo.jpg" alt="Flo's Furniture Co. logo: brown hand-drawn circular seal showing crossed woodworking tools (hammer, chisel, hand plane and paintbrush) with small flowers and leaves on a warm beige textured background; text reads Flo's Furniture Co.; conveys a rustic, handmade and welcoming tone">
     </div>
   </section>
 
@@ -145,7 +139,6 @@
   </div>
 </footer>
 
-<script src="featured-items.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
